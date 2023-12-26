@@ -1,0 +1,38 @@
+/*Align the title to the center of the page*/
+.body
+{
+	background-color: #B8CAE4;
+}
+.title{
+    text-align: center;
+}
+.table{
+	font-size: 13px;
+	text-align: center;
+	width: 95%;
+	margin: auto;
+	text-align: center;
+}
+
+/*Make alternating colors for the table rows*/
+.table tr:nth-child(odd){
+	background: #B8CAE4
+}
+
+.table tr:nth-child(even){
+	background: #dae5f4
+}
+.forms{
+    background:coral
+}
+.searchs
+{
+	text-align: center;
+}
+.ba{
+   text-align: center;
+}
+.entry
+{
+	margin-right: 10;
+}

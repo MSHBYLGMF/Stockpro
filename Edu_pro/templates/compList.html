@@ -1,0 +1,46 @@
+
+{% load static %}
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+</head>
+{% include 'navbar.html' %}
+<div class="mx-auto" style="width: 200px;">
+    <form method='POST' action=''>{% csrf_token %}
+    {{form}}
+        <input type="submit" value='Search'/>
+</form>
+</div>
+<br>
+<table class="table">
+    <tr>
+    <th>#</th>
+    <th>PC NAME</th>
+    <th>MAC ADDR</th>
+    <th>IP ADDRESS</th>
+    <th>os_model</th>
+    <th>USER'S NAME</th>
+    <th>LOCATION</th>
+    <th>Purchesed_date</th>
+    <th>Timestamp</th>
+    <th>Delete</th>
+    </tr>
+    {% for instance in queryset  %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><a href="{% url 'update' id=instance.id %}"> {{instance.computer_name}}</td>          
+            <td>{{instance.MAC_address}}</td>
+            <td>{{instance.IP_address}}</td>
+            <td>{{instance.os_model}}</td>
+            <td>{{instance.users_name}}</td>
+            <td>{{instance.location}}</td>
+            <td>{{instance.Purchesed_date}}</td>
+            <td>{{instance.Timestamp}}</td>
+
+            <td><a href="{% url 'delete' id=instance.id %}"> Delete </td>          
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

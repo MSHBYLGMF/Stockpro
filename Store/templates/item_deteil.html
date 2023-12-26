@@ -1,0 +1,41 @@
+
+{%include 'navbars.html'%}
+{% load static%}
+<head>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+</head>
+<br>
+<a href="{% url 'issue_items' queryset.id %}"><div class='btn btn-danger'>ISSUE THIS ITEM</div></a>
+<a href="{% url 'receive_items' queryset.id %}"><div class='btn btn-primary'>RECEIVE THIS ITEM</div></a>
+        <br><br>
+        {{title}}
+        <br><br>
+        <div class="display_table">
+          <table class='table'>
+                  <tr>
+                    <th>ITEM NAME</th>
+                    <th>QUANTITY IN STORE</th>
+                    <th>LAST UPDATED</th>
+                    <th>Timestamp</th>
+                    <th>Received_by</th>
+                    <th>Receive_quantity</th>
+                    <th>issue_quantity</th>
+                    <th>issue_by</th>
+
+                    <th>REORDER LEVEL</th>
+                  </tr>
+                  <tr>
+                    <td>{{queryset.item_name}}</td>
+                    <td>{{queryset.quantity}}</td>
+                    <td>{{queryset.last_updated}}</td>
+                    <td>{{queryset.time_stamp}}</td>
+                    <td>{{queryset.receive_by}}</td>
+                    <td> {{queryset.receive_quantity}}</td>
+                    <td>{{queryset.issue_quantity}}</td>
+                    <td>{{queryset.issue_by}}</td>
+                    <td>{{queryset.reorder_level}}</td>
+
+                  </tr>
+          </table>
+        </div>

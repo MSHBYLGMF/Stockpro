@@ -1,0 +1,69 @@
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+<html>
+<head>
+    <link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+</head>
+{% include 'navbars.html' %}
+</div>
+<br>
+<main role="main" class="container">
+  {% if messages %}
+        <ul class="messages">
+               {% for message in messages %}
+                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+               {% endfor %}
+       </ul>
+  {% endif %}
+  <div class="jumbotron">
+    <div class="header">{{title}}</div>
+    <form method='POST' action=''>{% csrf_token %}
+      {{form}}
+          <input type="submit" value='Search'/>
+    </form>
+    <br>
+    <div class="display_table">
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>COUNT</th>
+            <th>CATEGORY</th>
+            <th>ITEM NAME</th>
+            <th>QUANTITYINSTORE </th>
+            <th>Reorder_level</th>
+            <th>Timestamp</th>
+            <th>last_updated</th>
+            <th> Delete </th>
+          </tr>
+        </thead>
+      {% for instance in queryset %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{instance.category}}</td>
+            <td><a href="{% url 'update_items' instance.id %}">{{instance.item_name}}</a></td>
+            <td>
+              {% if instance.quantity <= instance.reorder_level %}
+              <div style="background-color: orange;">
+                <a href="{% url 'stock_detail' instance.id %}"></a>{{instance.quantity}}
+              </div>
+              {% else %}
+              <a href="{% url 'stock_detail' instance.id %}">{{instance.quantity}}
+              {% endif %}
+            </td>
+            <td><a href="{% url 'reorder_level' instance.id %}">{{instance.reorder_level}}</a></td>
+            <td>{{instance.time_stamp}}</td>
+            <td>{{instance.last_updated}}</td>
+            <td><a href="{% url 'delete_items' instance.id %}">Delete</a></td>
+            <!-- <td><a href="{% url 'delete_items' instance.id %}"><img src="{% static 'image/ba.webp'%}"></a></td> -->
+          </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</main>
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</body>
+</html>
