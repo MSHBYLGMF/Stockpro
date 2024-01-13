@@ -14,5 +14,4 @@ urlpatterns=[
     path('reorder_level/<int:id>/', views.reorder_level, name="reorder_level"),
     path('accounts/', include('registration.backends.default.urls')),
 
-
 ]
